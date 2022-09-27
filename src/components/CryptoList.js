@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 
 function CryptoList(){
 
+    const [cryptoArray, setCrypto] = useState([]);
+
     useEffect(()=>{
 
         const endpoint = 'https://api.exchange.cryptomkt.com/api/3/public/currency';
-        console.log(endpoint)
         axios.get(endpoint)
-        
         .then(response=>{
-            console.log(response)
+            setCrypto(response.data)
         })
         .catch(error=>{
             console.log(error)
@@ -18,10 +18,18 @@ function CryptoList(){
 
     },[])
 
+    console.log(cryptoArray)
 
     return(
         <>
-        <h1>CryptoList</h1>
+        
+        {
+            cryptoArray.map((oneCrypto, index)=>{
+                return(
+                    <h2 key={index}>{oneCrypto.full_name}</h2>
+                )
+            })
+        }
         </>
     )
 }
