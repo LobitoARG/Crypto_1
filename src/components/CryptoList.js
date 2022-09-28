@@ -1,5 +1,6 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+
 
 function CryptoList(){
 
@@ -10,26 +11,36 @@ function CryptoList(){
         const endpoint = 'https://api.exchange.cryptomkt.com/api/3/public/currency';
         axios.get(endpoint)
         .then(response=>{
-            setCrypto(response.data)
+            const apiDATA = response.data
+            const apiResult = apiDATA
+            const nuevoArray = Object.keys(apiResult)
+            console.log(nuevoArray)
+            setCrypto(nuevoArray)
         })
         .catch(error=>{
             console.log(error)
         })
+        
 
     },[])
 
-    console.log(cryptoArray)
+    //console.log(cryptoArray)
 
     return(
         <>
+        <div>
+            {
+                cryptoArray.map((oneCrypto,index)=>{
+                    return(
+                        <h1 key={index} className="text-2xl">{oneCrypto}</h1>
+                    )
+                })                
+            }
+            
         
-        {
-            cryptoArray.map((oneCrypto, index)=>{
-                return(
-                    <h2 key={index}>{oneCrypto.full_name}</h2>
-                )
-            })
-        }
+        </div>
+        
+        
         </>
     )
 }
