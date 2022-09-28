@@ -6,46 +6,45 @@ export const Detalle = () =>{
     let cryptoID = query.get('id')
 
     const [detailCrypto, setDetail] = useState([])
-    const [networkCrypto, setNetworkCrypto] = useState([])
+    
 
     useEffect(()=>{
-        const endpoint = `https://api.exchange.cryptomkt.com/api/3/public/currency/${cryptoID}`
+        const endpoint = `https://api.coingecko.com/api/v3/coins/${cryptoID}`
         axios.get(endpoint)
         .then(response =>{
             let cryptoINF = response.data
-            let cryptoNetworkArray = response.data.networks
             setDetail(cryptoINF)
-            setNetworkCrypto(cryptoNetworkArray)
-            //console.log(cryptoNetworkArray)
         })
         .catch(e =>{
             console.log(e)
         })
 
     },[cryptoID])
+    
+    
+    console.log(detailCrypto)
 
     return(
+        
         <div className=''>
+        {detailCrypto.length===0 && <h5>No se encontraron detalles</h5>}
         <h1 className='text-4xl text-center'>Informacion principal</h1>
-        
-        {networkCrypto.length===0 && <h5>No se encontraron detalles del Network</h5>}
+        <img src={detailCrypto.image.small} alt='logo'/>
         <div className='border-4 border-solid'>
-        <h1>Full Name: {detailCrypto.full_name}</h1>
-        {
-            networkCrypto.map((cryptoD, index) =>{
-                return(
-                    <ul key={index}>
-                    <li>Network:{cryptoD.network}</li>
-                    {cryptoD.protocol && <li>Protocolo:{cryptoD.protocol}</li>}
-                    <li>{cryptoD.avg_processing_time}</li>
-                    </ul>
-
-                )
-            })
-        }
-
+        <h1>Nombre: {detailCrypto.name}</h1>
+        <h1>Symbol: {detailCrypto.symbol}</h1>
+        <h1>Categoria: {detailCrypto.categories}</h1>
+        <p>Descripcion:{detailCrypto.description.en}</p>
+        <p>Homepage: {detailCrypto.links.homepage}</p>
+        <p>Ranking en el mercado: {detailCrypto.market_cap_rank}</p>
+        <ul>
+            <p>Current Price:</p>
+            <li>USD: {detailCrypto.market_data.current_price.usd}</li>
+            <li>EUR: {detailCrypto.market_data.current_price.eur}</li>
+            <li>ETH: {detailCrypto.market_data.current_price.eth}</li>
+            <li>ARS: {detailCrypto.market_data.current_price.ars}</li>
+        </ul>
         </div>
-        
         </div>
     )
 }

@@ -5,16 +5,15 @@ import { Link } from 'react-router-dom'
 
 function CryptoList(){
 
-    const [cryptoArray, setCrypto] = useState([]);
+    const [cryptoArray, setCryptoArray] = useState([]);
 
     useEffect(()=>{
 
-        const endpoint = 'https://api.exchange.cryptomkt.com/api/3/public/currency';
+        const endpoint = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=54&page=1&sparkline=false';
         axios.get(endpoint)
         .then(response=>{
             const apiDATA = response.data
-            const nuevoArray = Object.keys(apiDATA)
-            setCrypto(nuevoArray)
+            setCryptoArray(apiDATA)
         })
         .catch(error=>{
             console.log(error)
@@ -31,8 +30,8 @@ function CryptoList(){
             {
                 cryptoArray.map((oneCrypto,index)=>{
                     return(
-                        <ul key={index} className='border-2 border-gray-500 hover:border-blue-400 hover:bg-blue-100/50 mt-4 mr-4 w-[15vw]'>
-                            <Link to={`/detail?id=${oneCrypto}`}><li className="text-2xl text-center hover:cursor-default">{oneCrypto}</li></Link> 
+                        <ul key={index} className='border-2 border-gray-500 hover:border-blue-400 hover:bg-blue-100/50 mt-4 mr-4 w-[20vw]'>
+                            <Link to={`/detail?id=${oneCrypto.id}`}><li className="text-2xl text-center hover:cursor-default">{oneCrypto.name}</li></Link> 
                         </ul>
                         
                     )
