@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 
 function CryptoList(){
@@ -12,9 +13,7 @@ function CryptoList(){
         axios.get(endpoint)
         .then(response=>{
             const apiDATA = response.data
-            const apiResult = apiDATA
-            const nuevoArray = Object.keys(apiResult)
-            console.log(nuevoArray)
+            const nuevoArray = Object.keys(apiDATA)
             setCrypto(nuevoArray)
         })
         .catch(error=>{
@@ -24,24 +23,23 @@ function CryptoList(){
 
     },[])
 
-    //console.log(cryptoArray)
-
     return(
-        <>
-        <div>
+        <div className='container mx-auto'>
+        {cryptoArray.length===0 && <h5>Loading..</h5>}
+        <h1 className='text-3xl text-center'>Crypto List</h1>
+        <div className='flex flex-row flex-wrap justify-around'>
             {
                 cryptoArray.map((oneCrypto,index)=>{
                     return(
-                        <h1 key={index} className="text-2xl">{oneCrypto}</h1>
+                        <ul key={index} className='border-2 border-gray-500 hover:border-blue-400 hover:bg-blue-100/50 mt-4 mr-4 w-[15vw]'>
+                            <Link to={`/detail?id=${oneCrypto}`}><li className="text-2xl text-center hover:cursor-default">{oneCrypto}</li></Link> 
+                        </ul>
+                        
                     )
                 })                
             }
-            
-        
         </div>
-        
-        
-        </>
+        </div>
     )
 }
 
