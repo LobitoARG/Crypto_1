@@ -4,7 +4,7 @@ import Logo from "./Logo";
 
 function Header(){
     return(
-        <header className='bg-black text-white'>
+        <header className='bg-[#a5d6a7] text-[#212121]]'>
             <div className="flex justify-around items-center p-2">
                 <div className="w-100%">
                 <Logo/>

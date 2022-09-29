@@ -1,9 +1,9 @@
 
 function Home(){
     return(
-        <>
-        <h1 className="text-3xl">Aca va el home</h1>
-        </>
+        <div className=" bg-[#e0e0e0] h-[100vh] text-[#212121] text-center">
+        <h1>Bienvenido!</h1>
+        </div>
     )
 }
 
