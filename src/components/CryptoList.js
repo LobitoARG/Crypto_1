@@ -9,10 +9,11 @@ function CryptoList(){
 
     useEffect(()=>{
 
-        const endpoint = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=54&page=1&sparkline=false';
+        const endpoint = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=52&page=1';
         axios.get(endpoint)
         .then(response=>{
             const apiDATA = response.data
+            console.log(apiDATA)
             setCryptoArray(apiDATA)
         })
         .catch(error=>{

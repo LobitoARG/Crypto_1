@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 
 export const Detalle = () =>{
@@ -16,6 +17,7 @@ export const Detalle = () =>{
         axios.get(endpoint)
         .then(response =>{
             let cryptoINF = response.data
+            console.log(cryptoINF)
             setDetail(cryptoINF)
             
         })
@@ -27,17 +29,17 @@ export const Detalle = () =>{
 
     return(
         
-        <div>
+        <div className='max-w-[50%] m-auto shadow-lg shadow-blue-500/50 mt-5'>
         <h1 className='text-4xl text-center'>Informacion principal</h1>
         {!detailCrypto && <h1 className='text-4xl text-center'>Loading...</h1>}
         <img src={detailCrypto?.image?.small} alt='logo' className='m-auto w-[5vw]'/>
         <div>
-        <div className='flex flex-col flex-wrap text-center justify-around shadow-lg shadow-blue-500/50 mt-5'>
+        <div className='flex flex-col flex-wrap text-center justify-around'>
                 <h1>{detailCrypto.symbol}</h1>
                 <h1>Name: {detailCrypto.name}</h1>
                 <h1>Category: {detailCrypto.categories}</h1>
                 {/* <p>Description:{detailCrypto?.description?.en}</p> */}
-                <p>Homepage: {detailCrypto?.links?.homepage}</p>
+                <p>Homepage:{detailCrypto?.links?.homepage}</p>
                 <p>Ranking in Market: {detailCrypto.market_cap_rank}</p>
                 <ul>
                     <p>Current Price:</p>

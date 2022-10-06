@@ -6,7 +6,7 @@ function Links() {
     return (
       <>
         <Link className="block pr-2" to={"/"}>
-          <p>Home</p>
+          <p >Home</p>
         </Link>
         <Link className="block pr-2" to={"/list"}>
           <p>Crypto List</p>
