@@ -6,16 +6,16 @@ function Links() {
     return (
       <>
         <Link className="block pr-2" to={"/"}>
-          <p >Home</p>
+          <p className='text-[#6b7280] hover:text-[#d4d4d8]'>Home</p>
         </Link>
         <Link className="block pr-2" to={"/list"}>
-          <p>Crypto List</p>
+          <p className='text-[#6b7280] hover:text-[#d4d4d8]'>Crypto List</p>
         </Link>
         <Link className="block pr-2" to={"/list"}>
-          <p>Crypto Prices</p>
+          <p className='text-[#6b7280] hover:text-[#d4d4d8]'>Crypto Prices</p>
         </Link>
         <Link className="block pr-2" to={"/list"}>
-          <p>Crypto Books</p>
+          <p className='text-[#6b7280] hover:text-[#d4d4d8]'>Crypto Books</p>
         </Link>
       </>
     );
